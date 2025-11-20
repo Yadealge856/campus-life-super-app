@@ -11,7 +11,9 @@ section {
     border-radius: 8px;
 }
 
-button {
+/* Only make buttons inside card containers full-width */
+.card-button-full button,
+.border .btn {
     width: 100%;
 }
 
