@@ -41,33 +41,25 @@ function wireSearch() {
 	});
 }
 
-function addToCalendar(eventObj) {
-	// Create a minimal .ics file for the event
-	const dt = eventObj.date.replace(/-/g, '') + 'T090000'; // 9:00 AM default
-	const uid = `event-${eventObj.id}@lasell.edu`;
-	const ics = [
-		'BEGIN:VCALENDAR',
-		'VERSION:2.0',
-		'PRODID:-//Lasell University//Campus Life//EN',
-		'BEGIN:VEVENT',
-		`UID:${uid}`,
-		`DTSTAMP:${dt}Z`,
-		`DTSTART:${dt}Z`,
-		`SUMMARY:${eventObj.title}`,
-		`LOCATION:${eventObj.loc || ''}`,
-		'END:VEVENT',
-		'END:VCALENDAR'
-	].join('\r\n');
+function showToast(message) {
+	// Simple toast: create an element, show it for 2s, then remove it.
+	const t = document.createElement('div');
+	t.textContent = message;
+	t.style.position = 'fixed';
+	t.style.right = '16px';
+	t.style.bottom = '16px';
+	t.style.background = 'rgba(0,0,0,0.85)';
+	t.style.color = 'white';
+	t.style.padding = '10px 14px';
+	t.style.borderRadius = '6px';
+	t.style.zIndex = 9999;
+	document.body.appendChild(t);
+	setTimeout(() => t.remove(), 2000);
+}
 
-	const blob = new Blob([ics], { type: 'text/calendar' });
-	const url = URL.createObjectURL(blob);
-	const a = document.createElement('a');
-	a.href = url;
-	a.download = `${eventObj.title.replace(/\s+/g,'_')}.ics`;
-	document.body.appendChild(a);
-	a.click();
-	a.remove();
-	URL.revokeObjectURL(url);
+function addToCalendar(eventObj) {
+	// Beginner-friendly: just show a confirmation instead of generating files.
+	showToast(`Added "${eventObj.title}" to your calendar (placeholder)`);
 }
 
 document.addEventListener('click', e => {
