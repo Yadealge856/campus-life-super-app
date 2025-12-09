@@ -91,6 +91,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	renderEvents();
 	wireSearch();
 	renderDining();
+
+	// Feature button navigation
+	const btnEvents = document.getElementById('btn-events');
+	if (btnEvents) btnEvents.addEventListener('click', () => {
+		window.location.href = 'events.html';
+	});
+	const btnDining = document.getElementById('btn-dining');
+	if (btnDining) btnDining.addEventListener('click', () => {
+		window.location.href = 'dining.html';
+	});
+	// Modal handled by Bootstrap attributes
 });
 
 // Placeholder for future API fetch

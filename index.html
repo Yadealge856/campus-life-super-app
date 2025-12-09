@@ -32,24 +32,38 @@
             <div class="col-md-4">
                 <div class="border p-3">
                     <h3>Upcoming Events</h3>
-                    <button class="btn btn-primary mt-2">View All</button>
+                    <button class="btn btn-primary mt-2" id="btn-events">View All</button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="border p-3">
                     <h3>Dining Options</h3>
-                    <button class="btn btn-primary mt-2">See Menus</button>
+                    <button class="btn btn-primary mt-2" id="btn-dining">See Menus</button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="border p-3">
                     <h3>Campus Map</h3>
-                    <button class="btn btn-primary mt-2">Explore</button>
+                    <button class="btn btn-primary mt-2" id="btn-map" data-bs-toggle="modal" data-bs-target="#mapModal">Explore</button>
                 </div>
             </div>
         </div>
     </div>
   </section>
+    <!-- Campus Map Modal -->
+    <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mapModalLabel">Campus Map</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Lasell_University_campus_map.png" alt="Lasell University campus map" style="max-width:100%;height:auto;border-radius:8px;" />
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <footer class="bg-dark text-white text-center py-3 mt-5">
   <small>&copy; 2025 Lasell University. All rights reserved.</small>
