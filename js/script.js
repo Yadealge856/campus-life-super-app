@@ -1,3 +1,26 @@
+// External API: OpenWeather (demo, Lasell University location)
+function fetchWeather() {
+	const weatherDiv = document.getElementById('weather');
+	if (!weatherDiv) return;
+	// Lasell University: Newton, MA
+	const lat = 42.3426, lon = -71.2276;
+	const apiKey = 'demo'; // Replace with your OpenWeather API key
+	const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+	fetch(url)
+		.then(res => res.json())
+		.then(data => {
+			if (data.current_weather) {
+				const temp = data.current_weather.temperature;
+				const wind = data.current_weather.windspeed;
+				weatherDiv.innerHTML = `<div class="alert alert-info" role="alert">Current Weather: ${temp}&deg;C, Wind: ${wind} km/h</div>`;
+			} else {
+				weatherDiv.innerHTML = `<div class="alert alert-warning" role="alert">Weather data unavailable.</div>`;
+			}
+		})
+		.catch(() => {
+			weatherDiv.innerHTML = `<div class="alert alert-danger" role="alert">Could not load weather.</div>`;
+		});
+}
 console.log("MVP starting...");
 
 // Mock event data
@@ -91,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	renderEvents();
 	wireSearch();
 	renderDining();
+	fetchWeather();
 
 	// Feature button navigation
 	const btnEvents = document.getElementById('btn-events');
