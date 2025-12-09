@@ -1,4 +1,7 @@
-// External API: OpenWeather (demo, Lasell University location)
+// Lasell University Campus Life Super App
+// This file contains all the JavaScript for interactivity, API calls, and rendering.
+
+// Fetch and display live weather using OpenWeather API (or Open-Meteo for demo)
 function fetchWeather() {
 	const weatherDiv = document.getElementById('weather');
 	if (!weatherDiv) return;
@@ -21,20 +24,23 @@ function fetchWeather() {
 			weatherDiv.innerHTML = `<div class="alert alert-danger" role="alert">Could not load weather.</div>`;
 		});
 }
+
 console.log("MVP starting...");
 
-// Mock event data
+// Mock event data for demo purposes
 const mockEvents = [
 	{ id: 1, title: "Campus Concert", date: "2025-11-20", loc: "Campus Green" },
 	{ id: 2, title: "Tech Expo", date: "2025-12-01", loc: "Engineering Hall" }
 ];
 
+// Mock dining menu data
 const mockDining = {
 	breakfast: [{ name: "Breakfast Sandwich", price: 3.5 }],
 	lunch: [{ name: "Chicken Salad", price: 6.25 }],
 	dinner: [{ name: "Pasta Primavera", price: 7.5 }]
 };
 
+// Render events to the events page
 function renderEvents(list = mockEvents) {
 	const container = document.getElementById('events-list');
 	if (!container) return;
@@ -54,6 +60,7 @@ function renderEvents(list = mockEvents) {
 	});
 }
 
+// Wire up the search bar for events
 function wireSearch() {
 	const input = document.getElementById('event-search');
 	if (!input) return;
@@ -64,8 +71,8 @@ function wireSearch() {
 	});
 }
 
+// Show a temporary toast message (used for Add to Calendar)
 function showToast(message) {
-	// Simple toast: create an element, show it for 2s, then remove it.
 	const t = document.createElement('div');
 	t.textContent = message;
 	t.style.position = 'fixed';
@@ -80,11 +87,13 @@ function showToast(message) {
 	setTimeout(() => t.remove(), 2000);
 }
 
+// Add to Calendar button handler (shows toast)
 function addToCalendar(eventObj) {
-	// Beginner-friendly: just show a confirmation instead of generating files.
 	showToast(`Added "${eventObj.title}" to your calendar (placeholder)`);
 }
 
+// Delegate click events for Add to Calendar buttons
+// (so dynamically rendered buttons work)
 document.addEventListener('click', e => {
 	const target = e.target;
 	if (target.classList.contains('add-calendar')) {
@@ -94,6 +103,7 @@ document.addEventListener('click', e => {
 	}
 });
 
+// Render dining menu sections to the dining page
 function renderDining() {
 	const container = document.getElementById('dining-sections');
 	if (!container) return;
@@ -109,14 +119,14 @@ function renderDining() {
 	container.appendChild(makeSection('Dinner (5–9 PM)', mockDining.dinner));
 }
 
-// Init on load
+// Initialize all features on page load
 document.addEventListener('DOMContentLoaded', () => {
 	renderEvents();
 	wireSearch();
 	renderDining();
 	fetchWeather();
 
-	// Feature button navigation
+	// Feature button navigation (Home page)
 	const btnEvents = document.getElementById('btn-events');
 	if (btnEvents) btnEvents.addEventListener('click', () => {
 		window.location.href = 'events.html';
@@ -125,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (btnDining) btnDining.addEventListener('click', () => {
 		window.location.href = 'dining.html';
 	});
-	// Modal handled by Bootstrap attributes
+	// Campus Map modal handled by Bootstrap attributes
 });
 
 // Placeholder for future API fetch
